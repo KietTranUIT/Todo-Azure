@@ -19,7 +19,7 @@ jobs:
         go-version: 1.18
 
     - name: Build
-      run: go build -o build/go-app.exe -v
+      run: go build -o go-app -v
 
     - name: Test
       run: go test
