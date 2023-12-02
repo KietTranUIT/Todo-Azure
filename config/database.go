@@ -2,42 +2,46 @@ package config
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
+	"log"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/ichtrojan/thoth"
 	_ "github.com/joho/godotenv/autoload"
-	"log"
-	"os"
 )
 
 func Database() *sql.DB {
 	logger, _ := thoth.Init("log")
 
-	user, exist := os.LookupEnv("DB_USER")
+	//user, exist := os.LookupEnv("DB_USER")
+	user := "ctfpsdzrka"
 
-	if !exist {
-		logger.Log(errors.New("DB_USER not set in .env"))
-		log.Fatal("DB_USER not set in .env")
-	}
+	// if !exist {
+	// 	logger.Log(errors.New("DB_USER not set in .env"))
+	// 	log.Fatal("DB_USER not set in .env")
+	// }
 
-	pass, exist := os.LookupEnv("DB_PASS")
+	//pass, exist := os.LookupEnv("DB_PASS")
+	pass := "WQ741OK4PE82OEXA$"
 
-	if !exist {
-		logger.Log(errors.New("DB_PASS not set in .env"))
-		log.Fatal("DB_PASS not set in .env")
-	}
+	// if !exist {
+	// 	logger.Log(errors.New("DB_PASS not set in .env"))
+	// 	log.Fatal("DB_PASS not set in .env")
+	// }
 
-	host, exist := os.LookupEnv("DB_HOST")
+	//host, exist := os.LookupEnv("DB_HOST")
+	host := "todoappazure-server.mysql.database.azure.com"
 
-	if !exist {
-		logger.Log(errors.New("DB_HOST not set in .env"))
-		log.Fatal("DB_HOST not set in .env")
-	}
+	// if !exist {
+	// 	logger.Log(errors.New("DB_HOST not set in .env"))
+	// 	log.Fatal("DB_HOST not set in .env")
+	// }
+	db := "todo"
 
-	credentials := fmt.Sprintf("%s:%s@(%s:3306)/?charset=utf8&parseTime=True", user, pass, host)
+	cre := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", user, pass, host, db)
+	//credentials := fmt.Sprintf("%s:%s@(%s:3306)/?charset=utf8&parseTime=True", user, pass, host)
 
-	database, err := sql.Open("mysql", credentials)
+	database, err := sql.Open("mysql", cre)
 
 	if err != nil {
 		logger.Log(err)
@@ -46,7 +50,7 @@ func Database() *sql.DB {
 		fmt.Println("Database Connection Successful")
 	}
 
-	_, err = database.Exec(`CREATE DATABASE gotodo`)
+	//_, err = database.Exec(`CREATE DATABASE gotodo`)
 
 	if err != nil {
 		fmt.Println(err)

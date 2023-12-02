@@ -19,10 +19,10 @@ jobs:
         go-version: 1.18
 
     - name: Copy static template files
-      run: xcopy /i views build\views
+      run: xcoppy /i views build\views
 
-    - name: Copy static public files
-      run: xcopy /i public build\public
+    - name: Copy static log files
+      run: xcopy -r logs build\logs
 
     - name: Build
       run: go build -o build/go-app.exe -v
@@ -34,7 +34,7 @@ jobs:
       uses: Azure/webapps-deploy@v2
       with:
         # Name of the Azure Web App
-        app-name: todogo
+        app-name: TodoAppAzure
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
         package: build/
-        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        publish-profile: ${{ secrets.todoazure }}
