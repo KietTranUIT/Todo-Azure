@@ -19,7 +19,7 @@ jobs:
         go-version: 1.18
 
     - name: Copy static template files
-      run: xcoppy /i views build\views
+      run: xcopy /i views build\views
 
     - name: Copy static log files
       run: xcopy -r logs build\logs
