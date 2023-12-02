@@ -21,9 +21,6 @@ jobs:
     - name: Copy static template files
       run: xcopy /i views build\views
 
-    - name: Copy static log files
-      run: xcopy /i logs build\logs
-
     - name: Build
       run: go build -o build/go-app.exe -v
 
