@@ -2,11 +2,12 @@ package controllers
 
 import (
 	"fmt"
+	"html/template"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/ichtrojan/go-todo/config"
 	"github.com/ichtrojan/go-todo/models"
-	"html/template"
-	"net/http"
 )
 
 var (
@@ -22,6 +23,13 @@ func Show(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		fmt.Println(err)
+		http.ServeFile(w, r, "./views/index.html")
+		return
+	}
+
+	if statement == nil {
+		fmt.Println("ok")
+
 	}
 
 	var todos []models.Todo

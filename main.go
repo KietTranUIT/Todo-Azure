@@ -12,5 +12,6 @@ func main() {
 
 	if err != nil {
 		log.Println("Loi: ", err.Error())
+		return
 	}
 }
